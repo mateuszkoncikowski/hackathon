@@ -5,6 +5,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends AbstractPage {
+    @FindBy(xpath = "//div[@class = 'remember_check']/a")
+    private WebElement recoverPasswordLink;
+
     @FindBy(id = "email")
     private WebElement loginField;
 
@@ -23,5 +26,10 @@ public class LoginPage extends AbstractPage {
         this.typeInto(passwordField, password);
         this.click(loginButton);
         return new CockpitPage(driver);
+    }
+
+    public RecoverPasswordPage openRecoverPasswordPage() {
+        this.click(recoverPasswordLink);
+        return new RecoverPasswordPage(driver);
     }
 }

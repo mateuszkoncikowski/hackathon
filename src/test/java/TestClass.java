@@ -3,8 +3,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pages.CockpitPage;
 import pages.LoginPage;
+import pages.RecoverPasswordPage;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 public class TestClass {
     public WebDriver driver = new FirefoxDriver();
@@ -15,9 +18,12 @@ public class TestClass {
     }
 
     @Test
-    public void test() throws InterruptedException {
+    public void testIfBackToHomePageButtonIsVisible() {
         LoginPage loginPage = new LoginPage(driver);
-        CockpitPage cockpitPage = loginPage.logIn("admin@testarena.pl", "12qwAS");
+
+        RecoverPasswordPage recoverPasswordPage = loginPage.openRecoverPasswordPage();
+
+        assertThat(recoverPasswordPage.isBackToHomePageButtonPresent(), equalTo(true));
     }
 
     @After

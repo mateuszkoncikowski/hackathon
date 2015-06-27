@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -26,5 +27,9 @@ public class AbstractPage {
     public AbstractPage click(WebElement element) {
         element.click();
         return this;
+    }
+
+    public boolean isElementPresent(By by) {
+        return getDriver().findElements(by).size() > 0;
     }
 }
