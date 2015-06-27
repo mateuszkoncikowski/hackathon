@@ -1,34 +1,34 @@
-import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import pages.*;
 import utils.Utils;
 
-import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.StringContains.containsString;
 
 public class TestClass {
-    public WebDriver driver = new FirefoxDriver();
     @Rule
     public TestName testName = new TestName();
+
+    private WebDriver driver;
+    private BrowserDriver browserDriver = new BrowserDriver();
 
     public static final String BASE_URL = "http://demo.testarena.pl/";
     public static final String USERNAME = "administrator@testarena.pl";
     public static final String PASSWORD = "sumXQQ72$L";
 
     @Before
-    public void startBrowser() {
+    public void startBrowser() throws MalformedURLException {
+        driver = browserDriver.openRemoteBrowser();
+        driver.manage().window().maximize();
         driver.get(BASE_URL);
     }
 
@@ -95,15 +95,11 @@ public class TestClass {
 
         //then
         assertThat(usersPage.getPageSource(), containsString("Użytkownik został dodany."));
-
     }
 
     @After
     public void closeBrowser() throws IOException {
-        String screenshotName = String.format("%s.png", testName.getMethodName());
-
-        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(scrFile, new File(screenshotName));
-        driver.quit();
+        browserDriver.makeScreenshot(driver, testName);
+        browserDriver.closeBrowser(driver);
     }
 }
