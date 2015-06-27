@@ -19,9 +19,10 @@ public class EditUserPage extends TestArenaPage {
         super(driver);
     }
 
-    public void inputEmail(String email) {
+    public EditUserPage inputEmail(String email) {
         this.emailField.clear();
         this.emailField.sendKeys(email);
+        return this;
     }
 
     public EditUserPage submitIncorrectForm() {

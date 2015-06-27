@@ -18,11 +18,11 @@ public class TestArenaPage extends AbstractPage {
 
     public AdministrationPage openAdministrationPage() {
         click(administrationPageLink);
-        return new AdministrationPage(driver);
+        return new AdministrationPage(getDriver());
     }
 
     public UsersPage openUserPage() {
         click(userPageLink);
-        return new UsersPage(driver);
+        return new UsersPage(getDriver());
     }
 }

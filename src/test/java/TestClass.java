@@ -20,13 +20,16 @@ import static org.hamcrest.core.StringContains.containsString;
 
 public class TestClass {
     public WebDriver driver = new FirefoxDriver();
-
     @Rule
     public TestName testName = new TestName();
 
+    public static final String BASE_URL = "http://demo.testarena.pl/";
+    public static final String USERNAME = "administrator@testarena.pl";
+    public static final String PASSWORD = "sumXQQ72$L";
+
     @Before
     public void startBrowser() {
-        driver.get("http://demo.testarena.pl/");
+        driver.get(BASE_URL);
     }
 
     @Test
@@ -43,16 +46,21 @@ public class TestClass {
 
     @Test
     public void testIfEditingEmailErrorIsCorrect() {
+        //given
         LoginPage loginPage = new LoginPage(driver);
+        String incorrectEmail = "sd";
 
-//        CockpitPage cockpitPage = loginPage.logIn("admin@tc2014.pl", "12qwAS");
-        CockpitPage cockpitPage = loginPage.logIn("admin@testarena.pl", "12qwAS");
-        AdministrationPage adminPage = cockpitPage.openAdministrationPage();
-        UserPage userPage = adminPage.openUsersPage();
-        userPage.clickForFirstUserDetails();
-        EditUserPage editUserPage = userPage.openEditUserPage();
-        editUserPage.inputEmail("sd");
-        EditUserPage pageWithError = editUserPage.submitIncorrectForm();
+        //when
+        EditUserPage pageWithError = loginPage
+                .logIn(USERNAME, PASSWORD)
+                .openAdministrationPage()
+                .openUsersPage()
+                .clickForFirstUserDetails()
+                .openEditUserPage()
+                .inputEmail(incorrectEmail)
+                .submitIncorrectForm();
+
+        //then
         assertThat(pageWithError.errorMessage(), equalTo("The field must contain at least 6 characters."));
     }
 
@@ -71,8 +79,6 @@ public class TestClass {
     @Test
     public void testIfChangingUserDataIsPossible() {
         //given
-        String username = "administrator@testarena.pl";
-        String password = "sumXQQ72$L";
 
         String firstName = Utils.getRandomString();
         String lastName = Utils.getRandomString();
@@ -81,7 +87,7 @@ public class TestClass {
 
         //when
         UsersPage usersPage = loginPage
-            .logIn(username, password)
+            .logIn(USERNAME, PASSWORD)
             .openAdministrationPage()
             .openUserPage()
             .openAddUserPage()

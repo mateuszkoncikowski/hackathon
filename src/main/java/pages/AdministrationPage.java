@@ -13,8 +13,8 @@ public class AdministrationPage extends TestArenaPage {
         super(driver);
     }
 
-    public UserPage openUsersPage() {
+    public UsersPage openUsersPage() {
         this.click(users);
-        return new UserPage(driver);
+        return new UsersPage(driver);
     }
 }

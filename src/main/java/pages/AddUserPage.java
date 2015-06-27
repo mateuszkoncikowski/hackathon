@@ -26,6 +26,6 @@ public class AddUserPage extends TestArenaPage {
         typeInto(lastNameInput, lastname);
         typeInto(emailInput, email);
         click(saveButton);
-        return new UsersPage(driver);
+        return new UsersPage(getDriver());
     }
 }

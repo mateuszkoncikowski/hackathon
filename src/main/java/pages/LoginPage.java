@@ -25,11 +25,11 @@ public class LoginPage extends AbstractPage {
         this.typeInto(loginField, username);
         this.typeInto(passwordField, password);
         this.click(loginButton);
-        return new CockpitPage(driver);
+        return new CockpitPage(getDriver());
     }
 
     public RecoverPasswordPage openRecoverPasswordPage() {
         this.click(recoverPasswordLink);
-        return new RecoverPasswordPage(driver);
+        return new RecoverPasswordPage(getDriver());
     }
 }
