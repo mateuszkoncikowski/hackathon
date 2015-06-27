@@ -1,7 +1,10 @@
 package pages;
 
-/**
- * Created by mateusz on 27/06/15.
- */
-public class ErrorPage {
+import org.openqa.selenium.WebDriver;
+
+public class ErrorPage extends AbstractPage {
+
+    public ErrorPage(WebDriver driver) {
+        super(driver);
+    }
 }

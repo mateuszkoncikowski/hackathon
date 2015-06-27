@@ -24,6 +24,15 @@ public class AbstractPage {
         return this;
     }
 
+    public String getPageSource() {
+        return getDriver().getPageSource();
+    }
+
+    public ErrorPage openNonExistingPage() {
+        getDriver().get("https://testarena.pgs-soft.com/zaloguj2");
+        return new ErrorPage(driver);
+    }
+
     public AbstractPage click(WebElement element) {
         element.click();
         return this;
