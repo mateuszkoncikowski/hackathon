@@ -1,7 +1,5 @@
-package my.company.web;
-
-import my.company.web.pages.MainPage;
-import my.company.web.pages.SearchPage;
+import pages.MainPage;
+import pages.SearchPage;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
