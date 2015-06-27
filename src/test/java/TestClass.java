@@ -21,13 +21,19 @@ public class TestClass {
     private WebDriver driver;
     private BrowserDriver browserDriver = new BrowserDriver();
 
+    //TestArena credentials:
     public static final String BASE_URL = "http://demo.testarena.pl/";
     public static final String USERNAME = "administrator@testarena.pl";
     public static final String PASSWORD = "sumXQQ72$L";
 
+    //Mr.Buggy credentials:
+//    public static final String BASE_URL = "http://demo.mrbuggy2.testarena.pl/";
+//    public static final String USERNAME = "admin@tc2014.pl";
+//    public static final String PASSWORD = "12qwAS";
+
     @Before
     public void startBrowser() throws MalformedURLException {
-        driver = browserDriver.openRemoteBrowser();
+        driver = browserDriver.openLocalBrowser();
         driver.manage().window().maximize();
         driver.get(BASE_URL);
     }
